@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه جدول</title>
+    <link rel="stylesheet" href="./../css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="./../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="./../css/style.css">
+</head>
+<body>
+    <section x-data="toggleSidebar">
+        <!-- Sidebar -->
+        <section x-cloak class="sidebar sroller" :class="open || 'inactive'">
+            <div class="border-bottom border-secondary d-flex align-items-center justify-content-between justify-content-lg-center">
+                <div>
+                    <img width="80" class="img-fluid rounded-circle me-2 mx-auto d-block" src="./../images/avatar/4.png" alt="">
+                    <div class="my-2">
+                        <h6 class="fs-6 fw-bold text-white mb-0">هادی حاجی نیا</h6>
+                        <p class="fs-8 text-center text-white-50 mb-0">سوپر ادمین</p>
+                    </div>
+                </div>
+                <i @click="toggle" class=" d-lg-none bi bi-x fs-1"></i>
+            </div>
+            <div class="mt-4">
+                <ul class="list-unstyled">
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="./../index.html">
+                            <i class="me-2 bi bi-grid-fill"></i>
+                            <span>داشبورد</span>
+                        </a>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-file-break"></i>
+                            <span>صفحه ها</span>
+                            <i class="ms-auto bi" :class="[open ? 'bi-arrow-down' : 'bi-arrow-right']"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">جدول</a></li>
+                            <li class="submenu-item"><a href="./login.html">ورود</a></li>
+                            <li class="submenu-item"><a href="./register.html">عضویت</a></li>
+                        </ul>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-box-seam"></i>
+                            <span>محصولات</span>
+                            <i class="ms-auto bi" :class="[open ? 'bi-arrow-down' : 'bi-arrow-right']"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست محصولات</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد محصول</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش محصول</a></li>
+                        </ul>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-basket-fill"></i>
+                            <span>سفارشات</span>
+                            <i class="ms-auto bi" :class="[open ? 'bi-arrow-down' : 'bi-arrow-right']"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست سفارشات</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد سفارش</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش سفارش</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="me-2 bi bi-percent"></i>
+                            <span>تخفیف ها</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="me-2 bi bi-chat-right-dots-fill"></i>
+                            <span>تیکت</span>
+                        </a>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-people-fill"></i>
+                            <span>کاربران</span>
+                            <i class="ms-auto bi" :class="[open ? 'bi-arrow-down' : 'bi-arrow-right']"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست کاربران</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد کاربران</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش کاربران</a></li>
+                        </ul>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-chat-dots-fill"></i>
+                            <span>کامنت ها</span>
+                            <i class="ms-auto bi" :class="[open ? 'bi-arrow-down' : 'bi-arrow-right']"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست کامنت ها</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد کامنت ها</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش کامنت ها</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- End Sidebar -->
+        <!-- Main -->
+        <section class="main" :class="open || 'active'">
+            <!-- Header -->
+            <header class="header d-flex justify-content-between p-3 align-items-center bg-white shadow-sm rounded">
+                
+                <div>
+                    <a href="#"><i @click="toggle" class="toggle-sidebar-icon bi bi-justify fs-3"></i></a>
+                </div>
+
+                <div class="d-flex align-items-center">
+
+                    <div class="dropdown">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="position-absolute top-0 end-50 translate-middle badge rounded-pill bg-red">
+                                9
+                              </span>
+                            <i class="bi bi-envelope-fill fs-4"></i>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن ساختگی</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="dropdown mx-4">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell-fill fs-4"></i>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن ساختگی</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="dropdown">
+                        <div class="dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear-fill fs-4"></i>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-person fs-5 me-1"></i>
+                                    پروفایل
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-gear fs-6 me-1"></i>
+                                    تنظیمات
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-wallet fs-6 me-1"></i>
+                                    حساب کاربری
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-box-arrow-left fs-5 me-1"></i>
+                                    خروج
+                                </a>
+                            </li>
+                        </ul>
+                      </div>
+
+                </div>
+                
+            </header>
+            <!-- End Header -->
+            <!-- Content -->
+            <div class="content p-2 p-lg-4">
+                <div class="container-fluid">
+                    <!-- breadcrumb -->
+                    <div class="row">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb fs-8">
+                                <li class="breadcrumb-item"><a href="../index.html">داشبورد</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">لیست محصولات</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- End breadcrumb -->
+                    <!-- Product List -->
+                    <div class="row">
+                        <div class="card bg-white shadow rounded">
+                            <div class="card-header bg-white text-end">
+                                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-funnel-fill"></i>
+                                    فیلتر
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>نام محصول</th>
+                                                <th>موجودی</th>
+                                                <th>قیمت</th>
+                                                <th>وضعیت</th>
+                                                <th>عملیات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="text-muted">محصول اول</td>
+                                                <td class="text-muted">3</td>
+                                                <td class="text-muted"> 30,000 </td>
+                                                <td class="text-muted"> تایید شده </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    2
+                                                </td>
+                                                <td class="text-muted">
+                                                    محصول دوم
+                                                </td>
+                                                <td class="text-muted">
+                                                    5
+                                                </td>
+                                                <td class="text-muted">
+                                                    70,000
+                                                </td>
+                                                <td class="text-muted">
+                                                    تایید نشده
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    3
+                                                </td>
+                                                <td class="text-muted">
+                                                    محصول سوم
+                                                </td>
+                                                <td class="text-muted">
+                                                    10
+                                                </td>
+                                                <td class="text-muted">
+                                                    130,000
+                                                </td>
+                                                <td class="text-muted">
+                                                    تایید شده
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    4
+                                                </td>
+                                                <td class="text-muted">
+                                                    محصول چهارم
+                                                </td>
+                                                <td class="text-muted">
+                                                    8
+                                                </td>
+                                                <td class="text-muted">
+                                                    50,000
+                                                </td>
+                                                <td class="text-muted">
+                                                    تایید نشده
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    5
+                                                </td>
+                                                <td class="text-muted">
+                                                    محصول پنجم
+                                                </td>
+                                                <td class="text-muted">
+                                                    11
+                                                </td>
+                                                <td class="text-muted">
+                                                    30,000
+                                                </td>
+                                                <td class="text-muted">
+                                                    تایید شده
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    6
+                                                </td>
+                                                <td class="text-muted">
+                                                    محصول ششم
+                                                </td>
+                                                <td class="text-muted">
+                                                    15
+                                                </td>
+                                                <td class="text-muted">
+                                                    45,000
+                                                </td>
+                                                <td class="text-muted">
+                                                    تایید شده
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    7
+                                                </td>
+                                                <td class="text-muted">
+                                                    محصول هفتم
+                                                </td>
+                                                <td class="text-muted">
+                                                    9
+                                                </td>
+                                                <td class="text-muted">
+                                                    30,000
+                                                </td>
+                                                <td class="text-muted">
+                                                    تایید نشده
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light-primary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton1"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            عملیات
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">نمایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">ویرایش</a></li>
+                                                            <li><a class="dropdown-item" href="#">حذف</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <nav class="mt-4" aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Product List -->
+                </div>
+            </div>
+            <!-- End Content -->
+        </section>
+        <!-- End Main -->
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="#">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">فیلتر محصولات</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">نام محصول</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">وضعیت محصول</label>
+                            <select class="form-select">
+                                <option value="1">تائید شده</option>
+                                <option value="2">تائید</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+                        <button type="submit" class="btn btn-light-primary">فیلتر</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script defer src="../js/alpine.min.js"></script>
+    <script src="../js/alpinecomponents.js"></script>
+</body>
+</html>

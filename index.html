@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت</title>
+    <link rel="stylesheet" href="./css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <section x-data="toggleSidebar">
+        <!-- Sidebar -->
+        <section x-cloak class="sidebar sroller" :class="open || 'inactive'">
+            <div class="border-bottom border-secondary d-flex align-items-center justify-content-between justify-content-lg-center">
+                <div>
+                    <img width="80" class="img-fluid rounded-circle me-2 mx-auto d-block" src="./images/avatar/4.png" alt="">
+                    <div class="my-2">
+                        <h6 class="fs-6 fw-bold text-white mb-0">نام و نام خانوادگی</h6>
+                        <p class="fs-8 text-center text-white-50 mb-0">سوپر ادمین</p>
+                    </div>
+                </div>
+                <i @click="toggle" class=" d-lg-none bi bi-x fs-1"></i>
+            </div>
+            <div class="mt-4">
+                <ul class="list-unstyled">
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="./index.html">
+                            <i class="me-2 bi bi-grid-fill"></i>
+                            <span>داشبورد</span>
+                        </a>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-file-break"></i>
+                            <span>صفحه ها</span>
+                            <i class="ms-auto bi" :class="open ? 'bi-arrow-down' : 'bi-arrow-right'"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="./pages/table.html">جدول</a></li>
+                            <li class="submenu-item"><a href="./pages/login.html">ورود</a></li>
+                            <li class="submenu-item"><a href="./pages/register.html">عضویت</a></li>
+                        </ul>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-box-seam"></i>
+                            <span>محصولات</span>
+                            <i class="ms-auto bi" :class="open ? 'bi-arrow-down' : 'bi-arrow-right'"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست محصولات</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد محصول</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش محصول</a></li>
+                        </ul>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-basket-fill"></i>
+                            <span>سفارشات</span>
+                            <i class="ms-auto bi" :class="open ? 'bi-arrow-down' : 'bi-arrow-right'"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست سفارشات</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد سفارش</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش سفارش</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="me-2 bi bi-percent"></i>
+                            <span>تخفیف ها</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="me-2 bi bi-chat-right-dots-fill"></i>
+                            <span>تیکت</span>
+                        </a>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-people-fill"></i>
+                            <span>کاربران</span>
+                            <i class="ms-auto bi" :class="open ? 'bi-arrow-down' : 'bi-arrow-right'"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست کاربران</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد کاربران</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش کاربران</a></li>
+                        </ul>
+                    </li>
+                    <li x-data="dropdown" class="sidebar-item">
+                        <div @click="toggle" class="sidebar-link">
+                            <i class="me-2 bi bi-chat-dots-fill"></i>
+                            <span>کامنت ها</span>
+                            <i class="ms-auto bi" :class="open ? 'bi-arrow-down' : 'bi-arrow-right'"></i>
+                        </div>
+                        <ul x-show="open" x-transition class="submenu">
+                            <li class="submenu-item"><a href="#">لیست کامنت ها</a></li>
+                            <li class="submenu-item"><a href="#">ایجاد کامنت ها</a></li>
+                            <li class="submenu-item"><a href="#">ویرایش کامنت ها</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- End Sidebar -->
+        <!-- Main -->
+        <section class="main" :class="open || 'active'">
+            <!-- Header -->
+            <header class="header d-flex justify-content-between p-3 align-items-center bg-white shadow-sm rounded">
+                
+                <div>
+                    <a href="#"><i @click="toggle" class="toggle-sidebar-icon bi bi-justify fs-3"></i></a>
+                </div>
+
+                <div class="d-flex align-items-center">
+
+                    <div class="dropdown">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="position-absolute top-0 end-50 translate-middle badge rounded-pill bg-red">
+                                9
+                              </span>
+                            <i class="bi bi-envelope-fill fs-4"></i>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن ساختگی</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="dropdown mx-4">
+                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell-fill fs-4"></i>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن</a></li>
+                          <li><a class="dropdown-item fs-7" href="#">لورم ایپسوم متن ساختگی</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="dropdown">
+                        <div class="dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear-fill fs-4"></i>
+                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-person fs-5 me-1"></i>
+                                    پروفایل
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-gear fs-6 me-1"></i>
+                                    تنظیمات
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-wallet fs-6 me-1"></i>
+                                    حساب کاربری
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item fs-7" href="#">
+                                    <i class="bi bi-box-arrow-left fs-5 me-1"></i>
+                                    خروج
+                                </a>
+                            </li>
+                        </ul>
+                      </div>
+
+                </div>
+                
+            </header>
+            <!-- End Header -->
+            <!-- Content -->
+            <div class="content p-2 p-lg-4">
+                <div class="container-fluid">
+                    <div class="row gy-4">
+                        <div class="col-xl-9">
+                            <!-- Stats -->
+                            <div class="row g-3">
+
+                                <div class="col-6 col-xl-3">
+                                    <div class="card bg-white shadow rounded">
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon bg-green">
+                                                        <i class="bi bi-eye-fill lh-0"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 text-center mt-4">
+                                                    <h6 class="fs-7 text-muted">نمایش پروفایل</h6>
+                                                    <h6 class="fw-bold mb-0 purecounter" data-purecounter-start="0" data-purecounter-end="18600">0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-xl-3">
+                                    <div class="card bg-white shadow rounded">
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon bg-blue">
+                                                        <i class="bi bi-person-fill lh-0"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 text-center mt-4">
+                                                    <h6 class="fs-7 text-muted">لورم ایپسوم</h6>
+                                                    <h6 class="fw-bold mb-0 purecounter" data-purecounter-start="0" data-purecounter-end="126500">0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-xl-3">
+                                    <div class="card bg-white shadow rounded">
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon bg-purple">
+                                                        <i class="bi bi-person-plus-fill lh-0"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 text-center mt-4">
+                                                    <h6 class="fs-7 text-muted">لورم ایپسوم</h6>
+                                                    <h6 class="fw-bold mb-0 purecounter" data-purecounter-start="0" data-purecounter-end="95600">0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-xl-3">
+                                    <div class="card bg-white shadow rounded">
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <div class="stats-icon bg-red">
+                                                        <i class="bi bi-bookmark-dash-fill lh-0"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 text-center mt-4">
+                                                    <h6 class="fs-7 text-muted">لورم ایپسوم</h6>
+                                                    <h6 class="fw-bold mb-0 purecounter" data-purecounter-start="0" data-purecounter-end="452">0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Stats -->
+
+                            <!-- Chart 1 -->
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        <div class="card bg-white shadow rounded">
+                                            <div class="card-header bg-white">
+                                                <h5 class="fw-bold mb-0">لورم ایپسوم</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="chartdiv" style="height: 500px;"></div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- End Chart 1 -->
+                            <!-- Progress Bar & Comments -->
+                            <div class="row g-3 mt-4">
+                                <!-- Progress Bar -->
+                                <div class="col-xl-4">
+                                    <div class="card bg-white shadow rounded">
+                                        <div class="card-header bg-white">
+                                            <h5 class="fw-bold mb-0">لورم ایپسوم متن</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-purple" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                                </div>
+                                                <p class="fs-7 text-muted mt-2">لورم ایپسوم متن ساختگی</p>
+                                            </div>
+                                            <hr>
+                                            <div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-blue" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                                </div>
+                                                <p class="fs-7 text-muted mt-2">لورم ایپسوم متن ساختگی</p>
+                                            </div>
+                                            <hr>
+                                            <div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-green" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">66%</div>
+                                                </div>
+                                                <p class="fs-7 text-muted mt-2">لورم ایپسوم متن ساختگی</p>
+                                            </div>
+                                            <hr>
+                                            <div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-red" role="progressbar" style="width: 44%;" aria-valuenow="44" aria-valuemin="0" aria-valuemax="100">44%</div>
+                                                </div>
+                                                <p class="fs-7 text-muted mt-2">لورم ایپسوم متن ساختگی</p>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <!-- End Progress Bar -->
+                                <!-- Comments -->
+                                <div class="col-xl-8">
+                                    <div class="card bg-white shadow rounded">
+                                        <div class="card-header bg-white">
+                                            <h5 class="fw-bold mb-0">آخرین کامنت ها</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>تصویر</th>
+                                                            <th>نام کاربری</th>
+                                                            <th>کامنت</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><img width="50" class="img-fluid rounded-circle" src="./images/avatar/1.png" alt=""></td>
+                                                            <td class="text-muted">لورم ایپسوم</td>
+                                                            <td class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img width="50" class="img-fluid rounded-circle" src="./images/avatar/2.png" alt=""></td>
+                                                            <td class="text-muted">لورم ایپسوم</td>
+                                                            <td class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img width="50" class="img-fluid rounded-circle" src="./images/avatar/3.png" alt=""></td>
+                                                            <td class="text-muted">لورم ایپسوم</td>
+                                                            <td class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Comments -->
+                            </div>
+                            <!-- End Progress Bar & Comments -->
+                        </div>
+
+                        <div class="col-xl-3">
+                            <!-- Profile -->
+                            <div class="card bg-white shadow rounded">
+                                <div class="card-body p-4 d-flex align-items-center">
+                                    <img width="70" class="img-fluid rounded-circle" src="./images/avatar/4.png" alt="">
+                                    <div class="ms-3">
+                                        <h6 class="fw-bold">نام و نام خانوادگی</h6>
+                                        <p class="text-muted mb-0 dir-ltr">@hadi.hajinia</p> 
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Profile -->
+                            <!-- Users -->
+                            <div class="card bg-white shadow rounded mt-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="fw-bold text-center mb-0">لورم ایپسوم متن</h5>
+                                </div>
+                                <div class="card-body p-4">
+
+                                    <div class="d-flex align-items-center">
+                                        <img width="60" class="img-fluid rounded-circle" src="./images/avatar/3.png" alt="">
+                                        <div class="ms-3">
+                                            <h6 class="fw-bold">لورم ایپسوم</h6>
+                                            <p class="text-muted mb-0 dir-ltr">@lorem_ipsum</p> 
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center my-4">
+                                        <img width="60" class="img-fluid rounded-circle" src="./images/avatar/1.png" alt="">
+                                        <div class="ms-3">
+                                            <h6 class="fw-bold">لورم ایپسوم</h6>
+                                            <p class="text-muted mb-0 dir-ltr">@lorem_ipsum</p> 
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <img width="60" class="img-fluid rounded-circle" src="./images/avatar/2.png" alt="">
+                                        <div class="ms-3">
+                                            <h6 class="fw-bold">لورم ایپسوم</h6>
+                                            <p class="text-muted mb-0 dir-ltr">@lorem_ipsum</p> 
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button class="btn btn-outline-secondary mt-3">نمایش کاربران</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Users -->
+                            <!-- Chart 2 -->
+                            <div class="card bg-white shadow rounded mt-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="fw-bold text-center mb-0">لورم ایپسوم متن</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chartdiv2" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                            <!-- End Chart 2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Content -->
+        </section>
+        <!-- End Main -->
+    </section>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/purecounter_vanilla.js"></script>
+    <script>new PureCounter();</script>
+    <script defer src="./js/alpine.min.js"></script>
+    <script src="./js/alpinecomponents.js"></script>
+    <!-- MeChart JS 4 -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="./js/charts.js"></script>
+</body>
+</html>
