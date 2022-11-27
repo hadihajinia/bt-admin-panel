@@ -1,6 +1,6 @@
-# MyAdminPanel - Bootstrap 5 Right to Left Admin Dashboard
+# bt-admin-panel - Bootstrap 5 Right to Left Admin Dashboard
 
-### MyAdminPanel is a simple and beautiful responsive Admin Dashboard for Right to left language . Based on Bootstrap framework and AlpinJS
+### bt-admin-panel is a simple and beautiful responsive Admin Dashboard for Right to left language . Based on Bootstrap framework and AlpineJS
  
 ![alt text][logo]
 
